@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Data Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+
+    .form-container h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      margin-top: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #218838;
+    }
+
+    .success {
+      color: green;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Employee Form</h2>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
+    </div>
+    <div class="form-group">
+      <label for="nxid">NX ID:</label>
+      <input type="text" id="nxid" required>
+    </div>
+    <div class="form-group">
+      <label for="srfid">SRF ID:</label>
+      <input type="text" id="srfid" required>
+    </div>
+    <div class="form-group">
+      <label for="rank">Rank:</label>
+      <input type="text" id="rank" required>
+    </div>
+    <div class="form-group">
+      <label for="mobile">Mobile Number:</label>
+      <input type="text" id="mobile" required>
+    </div>
+    <button onclick="submitForm()">Submit</button>
+    <div class="success" id="successMessage"></div>
+  </div>
+
+  <script>
+    const scriptURL = 'YOUR_GOOGLE_SCRIPT_WEB_APP_URL_HERE';
+
+    function submitForm() {
+      const name = document.getElementById('name').value;
+      const nxid = document.getElementById('nxid').value;
+      const srfid = document.getElementById('srfid').value;
+      const rank = document.getElementById('rank').value;
+      const mobile = document.getElementById('mobile').value;
+
+      if (!name || !nxid || !srfid || !rank || !mobile) {
+        alert("Please fill all fields.");
+        return;
+      }
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify({
+          name: name,
+          nxid: nxid,
+          srfid: srfid,
+          rank: rank,
+          mobile: mobile
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => res.json())
+      .then(response => {
+        if (response.result === "success") {
+          document.getElementById('successMessage').innerText = "Data submitted successfully!";
+          // Clear form
+          document.getElementById('name').value = '';
+          document.getElementById('nxid').value = '';
+          document.getElementById('srfid').value = '';
+          document.getElementById('rank').value = '';
+          document.getElementById('mobile').value = '';
+        } else {
+          alert("Error submitting data.");
+        }
+      })
+      .catch(err => {
+        console.error("Error:", err);
+        alert("Something went wrong.");
+      });
+    }
+  </script>
+</body>
+</html>
