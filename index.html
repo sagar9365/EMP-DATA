@@ -12,6 +12,39 @@
       <h1>Employee Registration</h1>
 
       <div class="form-group">
+        <label for="name">Name (As Per ID Card):</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Name Aa Per ID Card"
+          required
+          autocomplete="off"
+          aria-describedby="nameHelp"
+        />
+        <small id="nameHelp" class="form-text">Please enter your name in uppercase letters.</small>
+        <span class="error" aria-live="polite"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="srfid">SRF ID (Numbers only):</label>
+        <input
+          type="text"
+          id="srfid"
+          name="srfid"
+          placeholder="Enter SRF ID (Numbers only)"
+          maxlength="6"
+          pattern="\d+"
+          title="SRF ID must be numeric."
+          required
+          autocomplete="off"
+          aria-describedby="srfidHelp"
+        />
+        <small id="srfidHelp" class="form-text">Enter numeric SRF ID only (e.g., 123456)</small>
+        <span class="error" aria-live="polite"></span>
+      </div>
+
+      <div class="form-group">
         <label for="nxid">NX ID (Format: SRF0001):</label>
         <input
           type="text"
@@ -30,17 +63,47 @@
       </div>
 
       <div class="form-group">
-        <label for="name">Name (As Per ID Card):</label>
+        <label for="rank">Select Your Rank:</label>
+        <select id="rank" name="rank" required aria-describedby="rankHelp">
+          <option value="" disabled selected>Select Your Rank</option>
+          <option value="security-supervisor">Security Supervisor</option>
+          <option value="security-guard">Security Guard</option>
+          <option value="lady-security-guard">Lady Security Guard</option>
+          <option value="cctv-operator">CCTV Operator</option>
+        </select>
+        <small id="rankHelp" class="form-text">Please select your rank.</small>
+        <span class="error" aria-live="polite"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="mobile">Mobile Number:</label>
         <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Name Aa Per ID Card"
+          type="tel"
+          id="mobile"
+          name="mobile"
+          placeholder="Enter 10-digit Mobile Number"
+          pattern="[0-9]{10}"
+          title="Mobile Number must be 10 digits"
           required
           autocomplete="off"
-          aria-describedby="nameHelp"
+          aria-describedby="mobileHelp"
         />
-        <small id="nameHelp" class="form-text">Please enter your name in uppercase letters.</small>
+        <small id="mobileHelp" class="form-text">Enter a 10-digit mobile number (numbers only).</small>
+        <span class="error" aria-live="polite"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email ID:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your Email ID"
+          required
+          autocomplete="off"
+          aria-describedby="emailHelp"
+        />
+        <small id="emailHelp" class="form-text">Enter a valid email address.</small>
         <span class="error" aria-live="polite"></span>
       </div>
 
