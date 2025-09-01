@@ -1,142 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Employee Data Form</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f2f2f2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-
-    .form-container {
-      background: white;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 300px;
-    }
-
-    .form-container h2 {
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      font-weight: bold;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 8px;
-      box-sizing: border-box;
-      margin-top: 5px;
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      background: #28a745;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #218838;
-    }
-
-    .success {
-      color: green;
-      margin-top: 10px;
-      text-align: center;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0">
+    <title>Contact Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <style>
+        body {
+            background: #f8f9fa;
+        }
+        .form-container {
+            margin-top: 50px;
+            max-width: 600px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+        }
+        .form-title {
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .form-group label {
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>Employee Form</h2>
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="text" id="name" required>
+    <div class="container">
+        <div class="form-container mx-auto shadow-sm">
+            <h3 class="form-title">Contact Form</h3>
+            <form id="contactForm" autocomplete="off">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="nxid">NX ID</label>
+                    <input type="text" class="form-control" id="nxid" name="nxid" required>
+                </div>
+                <div class="form-group">
+                    <label for="srfid">SRF ID</label>
+                    <input type="text" class="form-control" id="srfid" name="srfid" required>
+                </div>
+                <div class="form-group">
+                    <label for="rank">Rank</label>
+                    <input type="text" class="form-control" id="rank" name="rank" required>
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="tel" class="form-control" id="mobile" name="mobile" required pattern="[0-9]{10}">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email ID</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-3">Submit</button>
+                <div id="formMessage" class="mt-3"></div>
+            </form>
+        </div>
     </div>
-    <div class="form-group">
-      <label for="nxid">NX ID:</label>
-      <input type="text" id="nxid" required>
-    </div>
-    <div class="form-group">
-      <label for="srfid">SRF ID:</label>
-      <input type="text" id="srfid" required>
-    </div>
-    <div class="form-group">
-      <label for="rank">Rank:</label>
-      <input type="text" id="rank" required>
-    </div>
-    <div class="form-group">
-      <label for="mobile">Mobile Number:</label>
-      <input type="text" id="mobile" required>
-    </div>
-    <button onclick="submitForm()">Submit</button>
-    <div class="success" id="successMessage"></div>
-  </div>
 
-  <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwScli9UoKBfqGhBxU4l7F41eowtCFPZAdxOHqdNub4dKL1QNlzuQYWjbFqC97vw4-a/exec';
+    <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwwO548Xev1AMHrOien-fISm8qKP5mvKC2NLgG_jW0BVsj5fd3OeCRNLTSg844txFoA/exec';
+    const form = document.getElementById('contactForm');
+    const messageDiv = document.getElementById('formMessage');
 
-    function submitForm() {
-      const name = document.getElementById('name').value;
-      const nxid = document.getElementById('nxid').value;
-      const srfid = document.getElementById('srfid').value;
-      const rank = document.getElementById('rank').value;
-      const mobile = document.getElementById('mobile').value;
-
-      if (!name || !nxid || !srfid || !rank || !mobile) {
-        alert("Please fill all fields.");
-        return;
-      }
-
-      fetch(scriptURL, {
-        method: 'POST',
-        body: JSON.stringify({
-          name: name,
-          nxid: nxid,
-          srfid: srfid,
-          rank: rank,
-          mobile: mobile
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(res => res.json())
-      .then(response => {
-        if (response.result === "success") {
-          document.getElementById('successMessage').innerText = "Data submitted successfully!";
-          // Clear form
-          document.getElementById('name').value = '';
-          document.getElementById('nxid').value = '';
-          document.getElementById('srfid').value = '';
-          document.getElementById('rank').value = '';
-          document.getElementById('mobile').value = '';
-        } else {
-          alert("Error submitting data.");
-        }
-      })
-      .catch(err => {
-        console.error("Error:", err);
-        alert("Something went wrong.");
-      });
-    }
-  </script>
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                messageDiv.innerHTML = "<div class='alert alert-success'><b>Thank you! Your submission has been received.</b></div>";
+                form.reset();
+            })
+            .catch(error => {
+                messageDiv.innerHTML = "<div class='alert alert-danger'><b>Error! Please try again.</b></div>";
+                console.error('Error!', error.message);
+            });
+    });
+    </script>
 </body>
 </html>
