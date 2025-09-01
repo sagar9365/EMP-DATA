@@ -35,19 +35,24 @@
             <form id="contactForm" autocomplete="off">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Name" required>
                 </div>
                 <div class="form-group">
                     <label for="nxid">NX ID</label>
-                    <input type="text" class="form-control" id="nxid" name="nxid" required>
+                    <input type="text" class="form-control" id="nxid" name="nxid" placeholder="Enter Your NX ID " required>
                 </div>
                 <div class="form-group">
                     <label for="srfid">SRF ID</label>
-                    <input type="text" class="form-control" id="srfid" name="srfid" required>
+                    <input type="text" class="form-control" id="srfid" name="srfid" placeholder="Enter Your SRF ID" required>
                 </div>
                 <div class="form-group">
                     <label for="rank">Rank</label>
-                    <input type="text" class="form-control" id="rank" name="rank" required>
+                    <select class="form-control" id="rank" name="rank" required>
+                        <option value="" disabled selected>Select Your Rank</option>
+                        <option value="" Supervisor>Security Supervisor</option>
+                        <option value="" SG>Security Guard</option>
+                        <option value="" LG>Security Lady  Guard</option>
+                        <option value="" CCTV>CCTV Operator</option>
                 </div>
                 <div class="form-group">
                     <label for="mobile">Mobile Number</label>
