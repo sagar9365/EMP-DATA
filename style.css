@@ -1,114 +1,164 @@
-/* Reset & base */
-*,
-*::before,
-*::after {
+/* Reset + Font */
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f1f4f8;
-  color: #222;
-  margin: 0;
   min-height: 100vh;
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: flex-start;
-  padding: 40px 20px;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  padding: 20px;
+  perspective: 1200px; /* 3D depth */
 }
 
+/* Main Container */
 main {
-  background: #ffffff;
-  max-width: 460px;
   width: 100%;
-  padding: 35px 30px;
-  border-radius: 12px;
-  box-shadow: 0 5px 22px rgba(0,0,0,0.12);
+  max-width: 550px;
 }
 
-h1 {
-  font-weight: 700;
-  font-size: 2rem;
-  color: #1a73e8;
-  margin-bottom: 30px;
+/* 3D Form Card */
+form {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(15px);
+  padding: 35px 25px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35),
+              inset 0 0 15px rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg) rotateX(0deg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Hover 3D tilt effect */
+form:hover {
+  transform: rotateY(8deg) rotateX(4deg) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45),
+              inset 0 0 20px rgba(255, 255, 255, 0.15);
+}
+
+/* Heading */
+form h1 {
   text-align: center;
+  font-size: 26px;
+  margin-bottom: 25px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
 }
 
+/* Form Group */
 .form-group {
-  margin-bottom: 22px;
+  margin-bottom: 18px;
   display: flex;
   flex-direction: column;
+  transform: translateZ(30px); /* Floating in 3D */
 }
 
+/* Labels */
 label {
-  font-weight: 600;
-  margin-bottom: 8px;
-  font-size: 1.05rem;
-  color: #333;
+  font-size: 14px;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #e0e0e0;
 }
 
-input[type="text"],
-input[type="tel"],
-input[type="email"],
+/* Inputs + Select */
+input,
 select {
-  padding: 12px 15px;
-  font-size: 1rem;
-  border: 1.8px solid #d1d9e6;
-  border-radius: 8px;
-  transition: border-color 0.3s ease;
-  text-transform: uppercase; /* Name and IDs uppercase */
-}
-
-input[type="email"], input[type="tel"], select {
-  text-transform: none; /* Email and mobile keep normal text */
-}
-
-input[type="text"]:focus,
-input[type="tel"]:focus,
-input[type="email"]:focus,
-select:focus {
-  outline: none;
-  border-color: #1a73e8;
-  box-shadow: 0 0 8px rgba(26, 115, 232, 0.5);
-  background-color: #f9fbff;
-}
-
-.form-text {
-  font-size: 0.85rem;
-  color: #6c757d;
-  margin-top: 5px;
-  line-height: 1.2;
-}
-
-.error {
-  color: #d93025;
-  font-size: 0.9rem;
-  height: 20px;
-  margin-top: 5px;
-  min-height: 20px;
-}
-
-button {
-  width: 100%;
-  padding: 15px;
-  font-size: 1.15rem;
-  font-weight: 700;
-  background: #1a73e8;
-  color: #fff;
+  padding: 12px 14px;
+  border-radius: 12px;
   border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover,
-button:focus {
-  background: #155ab6;
   outline: none;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  transition: all 0.3s ease;
+  transform: translateZ(20px);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
-@media (max-width: 480px) {
-  main {
-    padding: 25px 15px;
+input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Focus Glow */
+input:focus,
+select:focus {
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 12px rgba(79, 172, 254, 0.9),
+              inset 0 2px 6px rgba(0, 0, 0, 0.3);
+  transform: translateZ(30px) scale(1.03);
+}
+
+/* Small Help Text */
+.form-text {
+  font-size: 12px;
+  color: #d6d6d6;
+  margin-top: 4px;
+  transform: translateZ(15px);
+}
+
+/* Error */
+.error {
+  font-size: 13px;
+  color: #ff4d6d;
+  margin-top: 4px;
+  min-height: 16px;
+  display: block;
+  transform: translateZ(15px);
+}
+
+/* Submit Button */
+button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transform: translateZ(40px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s ease;
+}
+
+/* Button Hover 3D */
+button[type="submit"]:hover {
+  background: linear-gradient(135deg, #764ba2, #667eea);
+  transform: translateZ(50px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px) rotateX(10deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  form {
+    padding: 25px 18px;
+    transform: none !important; /* disable tilt on small screens */
+  }
+  form h1 {
+    font-size: 22px;
   }
 }
