@@ -16,6 +16,32 @@ nxidInput.addEventListener('input', () => {
   nxidInput.value = nxidInput.value.toUpperCase();
 });
 
+// --- GOOGLE SHEET FORM SUBMIT CODE (ADD YOUR WEB APP URL BELOW) ---
+const scriptURL = 'https://script.google.com/macros/s/AKfycbx8k8v5ulQpeFSkJpwWOem5gIci-opmvgNKd9KoAZKqSgjDzVUonmiFAza0UPftq-c/exec'; // <-- Replace with your deployment URL
+
+function submitToGoogleSheet(form) {
+  const formData = new FormData(form);
+
+  fetch(scriptURL, {
+    method: 'POST',
+    body: formData,
+  })
+    .then(response => response.json())
+    .then(result => {
+      if(result.result === 'success'){
+        alert('Your registration has been saved!');
+        form.reset();
+        clearErrors();
+      } else {
+        alert('Failed to save to Google Sheet.');
+      }
+    })
+    .catch(error => {
+      alert('Error occurred while saving to Google Sheet!');
+      console.error(error);
+    });
+}
+
 form.addEventListener('submit', function (event) {
   event.preventDefault();
   clearErrors();
@@ -69,7 +95,7 @@ form.addEventListener('submit', function (event) {
     hasErrors = true;
   }
 
-  // Email Validation: Required, HTML5 email validation will cover format
+  // Email Validation: Required (HTML5 email validation will cover format)
   const emailVal = emailInput.value.trim();
   if (!emailVal) {
     setError(emailInput, 'Email ID is required.');
@@ -77,9 +103,7 @@ form.addEventListener('submit', function (event) {
   }
 
   if (!hasErrors) {
-    alert('Form submitted successfully!\n' +
-      `Name: ${nameVal}\nSRF ID: ${srfidVal}\nNX ID: ${nxidVal}\nRank: ${rankSelect.options[rankSelect.selectedIndex].text}\nMobile: ${mobileVal}\nEmail: ${emailVal}`);
-    form.reset();
+    submitToGoogleSheet(form);
   }
 });
 
