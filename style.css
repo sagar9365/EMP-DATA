@@ -11,7 +11,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  background: linear-gradient(#f1f5f9);
   padding: 20px;
   perspective: 1200px; /* 3D depth */
 }
