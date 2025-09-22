@@ -91,6 +91,16 @@
         <small id="mobileHelp" class="form-text">Enter a 10-digit mobile number (numbers only).</small>
         <span class="error" aria-live="polite"></span>
       </div>
+<!--       <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Enter 10-digit phone number" required />
+ -->
+    <div class="checkbox-group">
+      <input type="checkbox" id="sameNumber" checked />
+      <label for="sameNumber">WhatsApp number same as phone</label>
+    </div>
+
+    <label for="whatsapp">WhatsApp Number:</label>
+    <input type="tel" id="whatsapp" name="whatsapp" pattern="[0-9]{10}" placeholder="Enter WhatsApp number" required />
 
       <div class="form-group">
         <label for="dob">Date of Birth:</label>
