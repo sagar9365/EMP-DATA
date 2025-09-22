@@ -52,6 +52,9 @@ small.form-text {
   min-height: 18px;
   margin-top: 2px;
 }
+.inline {
+  display: inline-block;
+}
 button {
   width: 100%;
   padding: 10px;
